@@ -1,4 +1,3 @@
-import org.asynchttpclient.util.Assertions;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -6,15 +5,23 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+
+
+
 
 public class AdminLogin {
   private WebDriver driver;
-  private WebDriverWait wait;
 
   @Before
   public void start(){
-    driver = new ChromeDriver();
+    ChromeOptions options = new ChromeOptions();
+    options.setBinary("C:/Users/buale/AppData/Local/BraveSoftware/Brave-Browser/Application/brave.exe");
+
+    driver = new FirefoxDriver();
   }
   @Test
   public void adminLoginTest(){
