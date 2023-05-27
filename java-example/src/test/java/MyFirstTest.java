@@ -20,10 +20,13 @@ public class MyFirstTest {
   }
   @Test
   public void myFirstTest(){
-    driver.get("http://www.google.com/");
+    driver.get("https://software-testing.ru/");
+    wait.until(titleIs("Software-Testing.Ru"));
+    driver.get("https://www.google.com/");
+    driver.findElement(By.xpath("//*[@id=\"L2AGLb\"]/div")).click();
     driver.findElement(By.name("q")).sendKeys("webdriver");
-    driver.findElement(By.name("btnG")).click();
-    wait.until(titleIs("webdriver - Поиск в Google"));
+    driver.findElement(By.xpath("/html/body/div[1]/div[3]/form/div[1]/div[1]/div[4]/center/input[1]")).click();
+    wait.until(titleIs("webdriver - Google Search"));
   }
   @After
   public void stop(){
