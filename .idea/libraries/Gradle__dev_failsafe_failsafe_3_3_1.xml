@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: dev.failsafe:failsafe:3.3.1" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="dev.failsafe" artifactId="failsafe" version="3.3.1" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/dev.failsafe/failsafe/3.3.1/cca46c10dd22fb0beb7e0c1e468604430355a4ab/failsafe-3.3.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/dev.failsafe/failsafe/3.3.1/81cb52cbde62be0a021b01c816377692191c37d0/failsafe-3.3.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
