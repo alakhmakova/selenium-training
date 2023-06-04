@@ -1,18 +1,27 @@
 import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.openqa.selenium.support.ui.ExpectedConditions.titleIs;
 
 public class MyFirstTest extends TestBase{
 
+
+  @Test
+  public void waitTest() {
+    driver.navigate().to("https://software-testing.ru/");
+    driver.findElement(By.xpath("//a[contains(@href, '/edu/')]")).click();
+    assertTrue(isElementPresent(By.id("jsn-master")));
+  }
   @Test
   public void myFirstTest(){
-    driver.get("https://software-testing.ru/");
-    wait.until(titleIs("Software-Testing.Ru"));
+//    driver.get("https://software-testing.ru/");
+//    wait.until(titleIs("Software-Testing.Ru"));
     driver.get("https://www.google.com/");
     driver.findElement(By.xpath("//*[@id=\"L2AGLb\"]/div")).click();
     driver.findElement(By.name("q")).sendKeys("webdriver");
