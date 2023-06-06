@@ -1,4 +1,13 @@
 import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import java.text.MessageFormat;
+import java.util.List;
+
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 public class CorrectProductPageTest extends TestBase{
   @Test
@@ -20,6 +29,29 @@ public class CorrectProductPageTest extends TestBase{
 Необходимо убедиться, что тесты работают в разных браузерах, желательно проверить во всех трёх ключевых браузерах (Chrome, Firefox, IE).
    */
     driver.get("http://localhost/litecart/");//открыть  litecart на главной странице
+    WebElement сampaign = driver.findElement(By.xpath("//div[@id='box-campaigns']"));//найти блок Campaigns box-most-popular, box-campaigns, box-latest-products
+    List<WebElement> products = сampaign.findElements(By.xpath(".//a[@class='link'][contains(@title,'Duck')]"));//выбрать первый товар в блоке Campaigns
+    WebElement firstProduct = products.get(0);
+
+    String productNameHomePage = firstProduct.findElement(By.xpath("./div[@class='name']")).getText();
+    String regularPriceHomePage = firstProduct.findElement(By.xpath("//s[@class='regular-price']")).getText();
+    String сampaignPriceHomePage = firstProduct.findElement(By.xpath("//strong[@class='campaign-price']")).getText();
+    String colourCampaignPriceHomePage = driver.findElement(By.xpath("//strong[@class='campaign-price']")).getCssValue("color");
+
+
+    firstProduct.click();//открыть страницу продукта
+
+    String productNameProductPage = driver.findElement(By.xpath("//h1[@itemprop='name']")).getText();
+    String regularPriceProductPage = driver.findElement(By.xpath("//s[@class='regular-price']")).getText();
+    String сampaignPriceProductPage = driver.findElement(By.xpath("//strong[@class='campaign-price']")).getText();
+    String colourCampaignPriceProductPage = driver.findElement(By.xpath("//strong[@class='campaign-price']")).getCssValue("color");
+    System.out.println("colour of campaign price from product page " + colourCampaignPriceProductPage);
+
+    assertEquals(productNameHomePage, productNameProductPage);
+    assertEquals(regularPriceHomePage, regularPriceProductPage);
+    assertEquals(сampaignPriceHomePage, сampaignPriceProductPage);
+    assertEquals(MessageFormat.format("rgba({}, 0, 0, {})", ), colourCampaignPriceHomePage);
+
 
   }
 }
