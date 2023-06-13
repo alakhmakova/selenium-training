@@ -59,7 +59,7 @@ public class TestBase {
     /*DesiredCapabilities capabilities = new DesiredCapabilities ();
     capabilities.setBrowserName("chrome");//браузер для удаленного запуска менять здесь
     driver = new RemoteWebDriver (capabilities);*/
-    driver = new FirefoxDriver();//браузер менять здесь
+    driver = new InternetExplorerDriver();//браузер менять здесь
     driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     tlDriver.set(driver);
     System.out.println(((HasCapabilities) driver).getCapabilities());
@@ -80,33 +80,4 @@ public class TestBase {
 //    driver.quit();
 //    driver = null;
   }
-  //Data Providers
-  /*public Iterator<Object[]> validUsersFromXml () throws IOException {
-    try (BufferedReader reader = new BufferedReader (new FileReader(new File("src/test/resources/users.xml")))) {
-      String xml = "";
-      String  line = reader.readLine ();
-      while (line != null) {
-        xml += line;
-        line = reader.readLine ();
-      }
-      XStream xstream = new XStream();
-      xstream.processAnnotations (UserData.class);
-      List<UserData> users = (List<UserData>) xstream.fromXML(xml);
-      return users.stream ().map ((g) -> new Object[] {g}).collect (Collectors.toList ()).iterator ();
-    }
-  }
-
-  public Iterator<Object[]> validUsersFromJson () throws IOException {
-    try (BufferedReader reader = new BufferedReader (new FileReader (new File ("src/test/resources/users.json")))) {
-      String json = "";
-      String  line = reader.readLine ();
-      while (line != null) {
-        json += line;
-        line = reader.readLine ();
-      }
-      Gson gson = new Gson();
-      List<UserData> users = gson.fromJson (json, new TypeToken<List<UserData>>() {}.getType ());
-      return users.stream ().map ((g) -> new Object[] {g}).collect (Collectors.toList ()).iterator ();
-    }
-  }*/
 }
