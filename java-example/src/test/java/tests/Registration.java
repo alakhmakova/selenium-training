@@ -10,19 +10,15 @@ public class Registration extends TestBase {
   public void ensurePreconditions() {
     /**отключить капча в админке**/
     login();
-    WebElement settings = driver.findElement(By.xpath("//span[@class='name'][text()='Settings']"));
-    settings.click();
-    WebElement security = driver.findElement(By.xpath("//span[@class='name'][text()='Security']"));
-    security.click();
+    driver.findElement(By.xpath("//span[@class='name'][text()='Settings']")).click();
+    driver.findElement(By.xpath("//span[@class='name'][text()='Security']")).click();
     WebElement captcha = driver.findElement(By.xpath("//tr[@class='row'][.//td[text()='CAPTCHA']]"));
-    WebElement edit = captcha.findElement(By.xpath("//a[@title='Edit'][contains(@href, 'key=captcha_enabled')]"));
-    edit.click();
+    captcha.findElement(By.xpath("//a[@title='Edit'][contains(@href, 'key=captcha_enabled')]")).click();
     WebElement captchaFalse = driver.findElement(By.xpath("//label[text()=' False']"));
     if (captchaFalse.isEnabled()) {
       captchaFalse.click();
     }
-    WebElement save = driver.findElement(By.xpath("//button[@name='save']"));
-    save.click();
+    driver.findElement(By.xpath("//button[@name='save']")).click();
   }
   @Test
   public void registrationTest() {
