@@ -15,6 +15,11 @@ dependencies {
     implementation 'org.seleniumhq.selenium:selenium-java:4.9.1'
     testImplementation 'junit:junit:4.13.1'
     implementation 'org.hamcrest:hamcrest-core:2.2'
+    implementation 'com.beust:jcommander:1.82'
+    implementation 'com.google.code.gson:gson:2.10.1'
+    implementation 'com.thoughtworks.xstream:xstream:1.4.20'
+
+
 }
 
 test {

@@ -1,0 +1,22 @@
+[
+  {
+    "firstName": "LastName0",
+    "lastName": "FirstName0",
+    "address1": "Address0",
+    "phone": "+10000675643",
+    "email": "user1686609114950@localhost",
+    "postcode": "12345",
+    "city": "City0",
+    "password": "password"
+  },
+  {
+    "firstName": "LastName1",
+    "lastName": "FirstName1",
+    "address1": "Address1",
+    "phone": "+11000675643",
+    "email": "user1686609114985@localhost",
+    "postcode": "12345",
+    "city": "City1",
+    "password": "password"
+  }
+]

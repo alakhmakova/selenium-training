@@ -1,0 +1,12 @@
+<list>
+  <model.UserData>
+    <firstName>LastName0</firstName>
+    <lastName>FirstName0</lastName>
+    <address1>Address0</address1>
+    <phone>+10000675643</phone>
+    <email>user1686605848342@localhost</email>
+    <postcode>12345</postcode>
+    <city>City0</city>
+    <password>password</password>
+  </model.UserData>
+</list>
