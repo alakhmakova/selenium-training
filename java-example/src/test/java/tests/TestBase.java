@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.HasCapabilities;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -45,7 +46,7 @@ public class TestBase {
     /*DesiredCapabilities capabilities = new DesiredCapabilities ();
     capabilities.setBrowserName("chrome");//браузер для удаленного запуска менять здесь
     driver = new RemoteWebDriver (capabilities);*/
-    driver = new FirefoxDriver();//браузер менять здесь
+    driver = new InternetExplorerDriver();//браузер менять здесь
     driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     tlDriver.set(driver);
     System.out.println(((HasCapabilities) driver).getCapabilities());

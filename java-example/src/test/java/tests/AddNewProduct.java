@@ -17,7 +17,7 @@ public class AddNewProduct extends TestBase {
   public void addNewProductTest() throws InterruptedException {
     JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
     long now = currentTimeMillis();
-    String name = "Duck № ";
+    String name = "Set of Ducks";
 
 
     /**В админке открыть меню Catalog, в правом верхнем углу нажать кнопку "Add New Product"**/
@@ -27,12 +27,13 @@ public class AddNewProduct extends TestBase {
 
     /**заполнить информацию на вкладке General**/
     driver.findElement(By.xpath("//label[text()=' Enabled']")).click();
-    driver.findElement(By.name("name[en]")).sendKeys(name + now);
+    //driver.findElement(By.name("name[en]")).sendKeys(name + now);
+    driver.findElement(By.name("name[en]")).sendKeys(name);
     driver.findElement(By.name("code")).sendKeys(name + now);
 
     //Categories - хочу установить чек бокс только на Rubber Ducks и убедиться, что остальные чек-боксы не выбраны
     WebElement categories = driver.findElement(By.xpath("//input[@name='categories[]'][@data-name='Root']"));
-    if (categories.isSelected()) {
+    if (!categories.isSelected()) {
       categories.click();
     }
     WebElement rubberDucks = driver.findElement(By.xpath("//input[@name='categories[]'][@data-name='Rubber Ducks']"));
@@ -63,12 +64,12 @@ public class AddNewProduct extends TestBase {
     //Добавить количество
     WebElement quantity = driver.findElement(By.name("quantity"));
     quantity.clear();
-    quantity.sendKeys("800");
+    quantity.sendKeys("5");
 
     //Определить наличие
     WebElement dropdownSoldOutStatus = driver.findElement(By.name("sold_out_status_id")); // Найти выпадающийо список
     Select select = new Select(dropdownSoldOutStatus); // Создать экземпляр класса Select
-    String text = "-- Select --"; // Значение, которое нужно выбрать
+    String text = "Sold out"; // Значение, которое нужно выбрать
     select.selectByVisibleText(text); // Выбор элемента по видимому тексту
 
     //Загрузить фото
@@ -77,13 +78,13 @@ public class AddNewProduct extends TestBase {
      При этом указывать в коде полный абсолютный путь к файлу плохо, на другой машине работать не будет.
      Надо средствами языка программирования преобразовать относительный путь в абсолютный.
      **/
-    File photo = new File("src/test/resources/duck.jpg");
+    File photo = new File("src/test/resources/set.jpg");
     WebElement foto = driver.findElement(By.xpath("//input[@name='new_images[]']"));
     foto.sendKeys(photo.getAbsolutePath());
 
     //Календарь
-    jsExecutor.executeScript("document.getElementsByName('date_valid_from')[0].value = '2023-06-13';");
-    jsExecutor.executeScript("document.getElementsByName('date_valid_to')[0].value = '2024-08-18';");
+    jsExecutor.executeScript("document.getElementsByName('date_valid_from')[0].value = '2023-06-10';");
+    jsExecutor.executeScript("document.getElementsByName('date_valid_to')[0].value = '2025-12-01';");
 
     /**заполнить информацию на вкладке Information**/
     driver.findElement(By.linkText("Information")).click();
@@ -127,18 +128,18 @@ public class AddNewProduct extends TestBase {
     /**заполнить информацию на вкладке Prices**/
     driver.findElement(By.linkText("Prices")).click();
 
-    jsExecutor.executeScript("document.getElementsByName('purchase_price')[0].value = '15.06';");
+    jsExecutor.executeScript("document.getElementsByName('purchase_price')[0].value = '7.00';");
 
     WebElement purchasePrice = driver.findElement(By.name("purchase_price_currency_code"));
     Select select3 = new Select(purchasePrice);
-    String currencyValue = "EUR";
+    String currencyValue = "USD";
     select3.selectByValue(currencyValue);
 
     WebElement taxClass = driver.findElement(By.name("tax_class_id"));
     Select select4 = new Select(taxClass);
     select4.selectByIndex(0);
 
-    jsExecutor.executeScript("document.getElementsByName('prices[USD]')[0].value = '20';");
+    jsExecutor.executeScript("document.getElementsByName('prices[USD]')[0].value = '50';");
     jsExecutor.executeScript("document.getElementsByName('gross_prices[EUR]')[0].value = '7.50';");
 
 //    WebElement pricesUSD = driver.findElement(By.name("prices[USD]"));
@@ -157,7 +158,7 @@ public class AddNewProduct extends TestBase {
 
     /**После сохранения товара нужно убедиться, что он появился в каталоге в админке**/
     driver.findElement(By.linkText("Rubber Ducks")).click();//на всякий случай захожу в нужную категорию, куда сохраняла товар
-    assertTrue(isElementPresent(By.linkText(name + now)));
+    assertTrue(isElementPresent(By.linkText(name)));
 
   }
 
