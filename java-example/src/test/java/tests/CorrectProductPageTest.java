@@ -6,6 +6,7 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 //import static org.hamcrest.Matchers.matchesPattern;
@@ -33,6 +34,7 @@ public class CorrectProductPageTest extends TestBase{
     int widthRegularPriceHomePage = sizeRegularPriceHomePage.getWidth();//ширина обычной цены
     int heightRegularPriceHomePage = sizeRegularPriceHomePage.getHeight();//высота обычной цены
 
+
 /**Акционная цена**/
     String сampaignPriceHomePage = firstProduct.findElement(By.xpath("//strong[@class='campaign-price']")).getText();
     String colorCampaignPriceHomePage = firstProduct.findElement(By.xpath("//strong[@class='campaign-price']")).getCssValue("color");//цвет
@@ -41,12 +43,23 @@ public class CorrectProductPageTest extends TestBase{
     int widthСampaignPriceHomePage = sizeСampaignPriceHomePage.getWidth();//ширина акционной цены
     int heightСampaignPriceHomePage = sizeСampaignPriceHomePage.getHeight();//высота акционной цены
 
+    /**Сравнить размеры шрифтов обычной и акционной цены на главной странице**/
+    String fontSizeRegular = firstProduct.findElement(By.xpath("//s[@class='regular-price']")).getCssValue("font-size").replace("px", "");
+    double fontSizeRegularPriceHomePage = Double.parseDouble(fontSizeRegular);
+    String fontSizeСampaign = firstProduct.findElement(By.xpath("//strong[@class='campaign-price']")).getCssValue("font-size").replace("px", "");
+    double fontSizeСampaignPriceHomePage = Double.parseDouble(fontSizeСampaign);
+    System.out.println("fontSizeRegularPriceHomePage " + fontSizeRegularPriceHomePage);
+    System.out.println("fontSizeСampaignPriceHomePage " + fontSizeСampaignPriceHomePage);
+    assertTrue(fontSizeСampaignPriceHomePage > fontSizeRegularPriceHomePage);
+
+
 /**Открыть страницу продукта**/
     firstProduct.click();
     String productNameProductPage = driver.findElement(By.xpath("//h1[@itemprop='name']")).getText();//название продукта
 
 /**Обычная цена**/
-    String regularPriceProductPage = driver.findElement(By.xpath("//s[@class='regular-price']")).getText();
+    String regularPriceProductPage = driver.findElement(By.xpath("//div[@itemprop='offers']/s[@class='regular-price']")).getText();
+    System.out.println("regularPriceProductPage " + regularPriceProductPage);
     String colorRegularPriceProductPage = driver.findElement(By.xpath("//s[@class='regular-price']")).getCssValue("color");//цвет
     String lineThroughRegularProductPage = driver.findElement(By.xpath("//s[@class='regular-price']")).getCssValue("text-decoration");//зачеркнутая
     Dimension sizeRegularProductPage = driver.findElement(By.xpath("//s[@class='regular-price']")).getSize();
@@ -60,6 +73,15 @@ public class CorrectProductPageTest extends TestBase{
     Dimension sizeСampaignPriceProductPage = driver.findElement(By.xpath("//strong[@class='campaign-price']")).getSize();
     int widthСampaignPriceProductPage = sizeСampaignPriceProductPage.getWidth();//ширина акционной цены
     int heightСampaignPriceProductPage = sizeСampaignPriceProductPage.getHeight();//высота акционной цены
+
+    /**Сравнить размеры шрифтов обычной и акционной цены на странице продукта**/
+    String fontSizeReg = driver.findElement(By.xpath("//s[@class='regular-price']")).getCssValue("font-size").replace("px", "");
+    double fontSizeRegularPriceProductPage = Double.parseDouble(fontSizeReg);
+    String fontSizeСamp = driver.findElement(By.xpath("//strong[@class='campaign-price']")).getCssValue("font-size").replace("px", "");
+    double fontSizeСampaignPriceProductPage = Double.parseDouble(fontSizeСamp);
+    System.out.println("fontSizeRegularPriceHomePage " + fontSizeRegularPriceProductPage);
+    System.out.println("fontSizeСampaignPriceHomePage " + fontSizeСampaignPriceProductPage);
+    assertTrue(fontSizeСampaignPriceProductPage > fontSizeRegularPriceProductPage);
 
 
 /**Тесты работают в разных браузерах (Chrome, Firefox, IE)**/
