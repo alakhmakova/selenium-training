@@ -10,8 +10,12 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
@@ -37,35 +41,44 @@ public class TestBase {
   }
 
   @Before
-  public void start() {
+  public void start() throws MalformedURLException {
     if (tlDriver.get() != null) {
       driver = tlDriver.get();
       wait = new WebDriverWait(driver, Duration.ofSeconds(10));
       return;
     }
+
+    // Установите URL-адрес удаленной машины, где запущен Selenium Server
+    URL remoteUrl = new URL("http://192.168.229.128:4444/wd/hub");
+
     //как установить соединение с Selenium Server
-    /*DesiredCapabilities capabilities = new DesiredCapabilities ();
-    capabilities.setBrowserName("chrome");//браузер для удаленного запуска менять здесь
-    driver = new RemoteWebDriver (capabilities);*/
-    driver = new EdgeDriver();//браузер менять здесь
+    DesiredCapabilities capabilities = new DesiredCapabilities();
+    capabilities.setBrowserName("firefox");//браузер для удаленного запуска менять здесь
+    driver = new RemoteWebDriver(remoteUrl, capabilities);
+
+    // driver = new EdgeDriver();//браузер менять здесь
     driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     tlDriver.set(driver);
     System.out.println(((HasCapabilities) driver).getCapabilities());
     wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
     Runtime.getRuntime().addShutdownHook(
-            new Thread(() -> {driver.quit(); driver = null;}));
+            new Thread(() -> {
+              driver.quit();
+              driver = null;
+            }));
   }
 
-  public void login(){
+  public void login() {
     driver.get("http://localhost/litecart/admin/");
     driver.findElement(By.name("username")).sendKeys("admin");
     driver.findElement(By.name("password")).sendKeys("admin");
     driver.findElement(By.name("login")).click();
   }
-  @After
-  public void stop(){
+
+//  @After
+//  public void stop() {
 //    driver.quit();
 //    driver = null;
-  }
+//  }
 }
