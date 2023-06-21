@@ -2,12 +2,10 @@ package tests;
 
 import org.junit.After;
 import org.junit.Before;
-import org.openqa.selenium.By;
-import org.openqa.selenium.HasCapabilities;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -49,14 +47,15 @@ public class TestBase {
     }
 
     // Установите URL-адрес удаленной машины, где запущен Selenium Server
-    URL remoteUrl = new URL("http://192.168.229.128:4444/wd/hub");
+    URL remoteUrl = new URL("http://localhost:4444/wd/hub");//192.168.0.105 //192.168.229.128
 
     //как установить соединение с Selenium Server
     DesiredCapabilities capabilities = new DesiredCapabilities();
-    capabilities.setBrowserName("firefox");//браузер для удаленного запуска менять здесь
+    capabilities.setBrowserName("firefox");//браузер для удаленного запуска менять здесь: internet explorer, MicrosoftEdge
+    capabilities.setPlatform(Platform.WINDOWS);
     driver = new RemoteWebDriver(remoteUrl, capabilities);
 
-    // driver = new EdgeDriver();//браузер менять здесь
+    //driver = new EdgeDriver();//браузер менять здесь
     driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     tlDriver.set(driver);
     System.out.println(((HasCapabilities) driver).getCapabilities());
