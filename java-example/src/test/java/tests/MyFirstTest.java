@@ -21,12 +21,13 @@ public class MyFirstTest extends TestBase{
 //    driver.get("https://software-testing.ru/");
 //    wait.until(titleIs("Software-Testing.Ru"));
     driver.get("https://www.google.com/");
-    driver.findElement(By.xpath("//*[@id=\"L2AGLb\"]/div")).click();
+   driver.findElement(By.xpath("//*[@id=\"L2AGLb\"]/div")).click();
     driver.findElement(By.name("q")).sendKeys("webdriver");
     driver.findElement(By.xpath("/html/body/div[1]/div[3]/form/div[1]/div[1]/div[4]/center/input[1]")).click();
     wait.until(ExpectedConditions.or(
             ExpectedConditions.titleIs("webdriver - Google Search"),
-            ExpectedConditions.titleIs("webdriver - Поиск в Google")//заголовок страницы меняется, поэтому пришлось усложнить условие на "или"
+            ExpectedConditions.titleIs("webdriver - Поиск в Google"),
+            ExpectedConditions.titleIs("webdriver - Google Zoeken")//заголовок страницы меняется, поэтому пришлось усложнить условие на "или"
     ));
   }
   @Test

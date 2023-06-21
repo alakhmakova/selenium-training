@@ -42,6 +42,7 @@ public class CartTests extends TestBase {
     /**6) открыть корзину (в правом верхнем углу кликнуть по ссылке Checkout)**/
     driver.findElement(By.linkText("Checkout »")).click();
 
+
 /**7) удалить все товары из корзины один за другим**/
     int iterations = driver.findElements(By.xpath("//table[@class='dataTable rounded-corners']//tr/td[@class='item']")).size();
     for (int i = 0; i < iterations; i++ ) {
