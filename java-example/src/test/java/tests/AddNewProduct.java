@@ -17,7 +17,7 @@ public class AddNewProduct extends TestBase {
   public void addNewProductTest() throws InterruptedException {
     JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
     long now = currentTimeMillis();
-    String name = "Set of Ducks";
+    String name = "Set of Ducks " + now;
 
 
     /**В админке открыть меню Catalog, в правом верхнем углу нажать кнопку "Add New Product"**/
@@ -27,9 +27,9 @@ public class AddNewProduct extends TestBase {
 
     /**заполнить информацию на вкладке General**/
     driver.findElement(By.xpath("//label[text()=' Enabled']")).click();
-    //driver.findElement(By.name("name[en]")).sendKeys(name + now);
     driver.findElement(By.name("name[en]")).sendKeys(name);
-    driver.findElement(By.name("code")).sendKeys(name + now);
+    //driver.findElement(By.name("name[en]")).sendKeys(name);
+    driver.findElement(By.name("code")).sendKeys(name);
 
     //Categories - хочу установить чек бокс только на Rubber Ducks и убедиться, что остальные чек-боксы не выбраны
     WebElement categories = driver.findElement(By.xpath("//input[@name='categories[]'][@data-name='Root']"));
