@@ -90,7 +90,6 @@
     <orderEntry type="library" name="Gradle: io.opentelemetry:opentelemetry-sdk-logs:1.25.0-alpha" level="project" />
     <orderEntry type="library" name="Gradle: io.opentelemetry:opentelemetry-api-logs:1.25.0-alpha" level="project" />
     <orderEntry type="library" name="Gradle: io.opentelemetry:opentelemetry-api-events:1.25.0-alpha" level="project" />
-    <orderEntry type="library" name="Gradle: com.browserstack:browserstack-local:1.4.0" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.junit.jupiter:junit-jupiter-engine:5.9.1" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.junit.platform:junit-platform-engine:1.9.1" level="project" />
   </component>
