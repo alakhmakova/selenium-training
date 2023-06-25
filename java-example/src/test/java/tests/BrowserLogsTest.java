@@ -1,5 +1,6 @@
 package tests;
 
+import net.lightbody.bmp.core.har.Har;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -13,7 +14,10 @@ public class BrowserLogsTest extends TestBase{
   @Test
   public void browserLogsTest() {
     login();
+    proxy.newHar();
     driver.get("http://localhost/litecart/admin/?app=catalog&doc=catalog&category_id=1");
+    Har har = proxy.endHar();
+    har.getLog().getEntries().forEach(l -> System.out.println(l.getResponse().getStatus() + ":" + l.getRequest().getUrl()));
 
     driver.findElement(By.linkText("[Root]")).click();
     driver.findElement(By.linkText("Rubber Ducks")).click();

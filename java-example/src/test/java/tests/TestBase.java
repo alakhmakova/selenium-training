@@ -1,6 +1,9 @@
 package tests;
 
 import com.google.common.io.Files;
+import net.lightbody.bmp.BrowserMobProxy;
+import net.lightbody.bmp.BrowserMobProxyServer;
+import net.lightbody.bmp.client.ClientUtil;
 import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.*;
@@ -33,6 +36,7 @@ public class TestBase {
   //public WebDriver driver;
   public EventFiringWebDriver driver;
   public WebDriverWait wait;
+  public BrowserMobProxy proxy;
 
 
   public boolean isElementPresent(By locator) {
@@ -84,6 +88,13 @@ public class TestBase {
     // Установите URL-адрес удаленной машины, где запущен Selenium Server
     URL remoteUrl = new URL("http://localhost:4444/wd/hub");
 
+    proxy = new BrowserMobProxyServer();
+    proxy.start(0);
+    Proxy seleniumProxy = ClientUtil.createSeleniumProxy(proxy);
+    ChromeOptions options = new ChromeOptions();
+    options.setCapability(CapabilityType.PROXY, seleniumProxy);
+    driver = new EventFiringWebDriver(new ChromeDriver(options));
+
     //как установить соединение с Selenium Server
    /**DesiredCapabilities capabilities = new DesiredCapabilities();
     capabilities.setBrowserName("firefox");//браузер для удаленного запуска менять здесь: internet explorer, MicrosoftEdge
@@ -97,7 +108,7 @@ public class TestBase {
     LoggingPreferences logPrefs = new LoggingPreferences();
     logPrefs.enable(LogType.PERFORMANCE, Level.ALL);
     cap.setCapability(CapabilityType.LOGGING_PREFS, logPrefs);**/
-    driver = new EventFiringWebDriver(new ChromeDriver());
+
     driver.register(new MyListener());
     driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     tlDriver.set(driver);
