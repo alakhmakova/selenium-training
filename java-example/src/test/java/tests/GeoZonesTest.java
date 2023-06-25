@@ -15,10 +15,10 @@ public class GeoZonesTest extends TestBase{
   @Test
   public void geoZonesTest() {
 
-    login();
-    driver.navigate().to("http://localhost/litecart/admin/?app=geo_zones&doc=geo_zones");//открыть  админку на странице GeoZones
+    app.login();
+    app.driver.navigate().to("http://localhost/litecart/admin/?app=geo_zones&doc=geo_zones");//открыть  админку на странице GeoZones
 
-    WebElement table = driver.findElement(By.className("dataTable"));//получить таблицу со страними
+    WebElement table = app.driver.findElement(By.className("dataTable"));//получить таблицу со страними
     List<WebElement> rows = table.findElements(By.className("row"));//получить все строки таблицы
     int size = rows.size();
     for (int i = 0; i < size; i++)  {
@@ -28,7 +28,7 @@ public class GeoZonesTest extends TestBase{
       countryName.click();//открыть страницу страны
 
 
-      List<WebElement> zones = driver.findElements(By.xpath("//select[contains(@name, 'zones') and contains(@name, '[zone_code]')]"));//получить все меню с зонами со страницы
+      List<WebElement> zones = app.driver.findElements(By.xpath("//select[contains(@name, 'zones') and contains(@name, '[zone_code]')]"));//получить все меню с зонами со страницы
       List<String> zoneNames = new ArrayList<>();//создать пустой список с названиями зон
       for (WebElement zone : zones){
         WebElement selectedZone = zone.findElement(By.xpath("./option[@selected='selected']"));//получить выбранную зону для данного выпадающего меню
@@ -43,8 +43,8 @@ public class GeoZonesTest extends TestBase{
 
       assertEquals(sortedZonesResult, zoneNames);//проверить, что отсортированный список зон соответствует списку зон с сайта
 
-      driver.navigate().to("http://localhost/litecart/admin/?app=geo_zones&doc=geo_zones");
-      table = driver.findElement(By.className("dataTable"));
+      app.driver.navigate().to("http://localhost/litecart/admin/?app=geo_zones&doc=geo_zones");
+      table = app.driver.findElement(By.className("dataTable"));
       rows = table.findElements(By.className("row"));
     }
 
