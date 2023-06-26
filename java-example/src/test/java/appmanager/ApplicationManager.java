@@ -1,7 +1,12 @@
 package appmanager;
 
+import net.lightbody.bmp.BrowserMobProxy;
+import net.lightbody.bmp.BrowserMobProxyServer;
+import net.lightbody.bmp.client.ClientUtil;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import tests.TestBase;
@@ -16,6 +21,7 @@ public class ApplicationManager {
 
   public EventFiringWebDriver driver;
   public WebDriverWait wait;
+  public BrowserMobProxy proxy;
   public static ThreadLocal<EventFiringWebDriver> tlDriver = new ThreadLocal<>();
 
 
@@ -33,12 +39,13 @@ public class ApplicationManager {
   // Установите URL-адрес удаленной машины, где запущен Selenium Server
   URL remoteUrl = new URL("http://localhost:4444/wd/hub");
 
-  /**proxy = new BrowserMobProxyServer();
+   proxy = new BrowserMobProxyServer();
    proxy.start(0);
    Proxy seleniumProxy = ClientUtil.createSeleniumProxy(proxy);
    ChromeOptions options = new ChromeOptions();
-   options.setCapability(CapabilityType.PROXY, seleniumProxy);**///добавить поле
-  driver = new EventFiringWebDriver(new ChromeDriver());
+   options.setCapability(CapabilityType.PROXY, seleniumProxy);
+
+    driver = new EventFiringWebDriver(new ChromeDriver(options));
 
   //как установить соединение с Selenium Server
   /**DesiredCapabilities capabilities = new DesiredCapabilities();

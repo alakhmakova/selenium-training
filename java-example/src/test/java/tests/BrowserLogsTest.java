@@ -1,6 +1,7 @@
 package tests;
 
 import appmanager.ApplicationManager;
+import net.lightbody.bmp.core.har.Har;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -15,7 +16,13 @@ public class BrowserLogsTest extends TestBase{
   @Test
   public void browserLogsTest() {
     app.login();
+
+    app.proxy.newHar();
     app.driver.get("http://localhost/litecart/admin/?app=catalog&doc=catalog&category_id=1");
+    Har har = app.proxy.endHar();
+    har.getLog().getEntries().forEach(l -> System.out.println(l.getResponse().getStatus() + ":" + l.getRequest().getUrl()));
+
+
     app.driver.findElement(By.linkText("[Root]")).click();
     app.driver.findElement(By.linkText("Rubber Ducks")).click();
     app.driver.findElement(By.linkText("Subcategory")).click();
