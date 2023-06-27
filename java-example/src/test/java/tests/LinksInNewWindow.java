@@ -13,7 +13,7 @@ public class LinksInNewWindow extends TestBase {
   @Test
   public void linksInNewWindowTest() throws InterruptedException {
     /**зайти в админку**/
-    app.login();
+    app.mainPage().login();
     String originalWindow = app.driver.getWindowHandle();// получаю идентификатор текущего окна
 
     app.driver.findElement(By.xpath("//span[text()='Countries']")).click();/**открыть пункт меню Countries**/

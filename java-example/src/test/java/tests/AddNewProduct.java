@@ -21,7 +21,7 @@ public class AddNewProduct extends TestBase {
 
 
     /**В админке открыть меню Catalog, в правом верхнем углу нажать кнопку "Add New Product"**/
-    app.login();
+    app.mainPage().login();
     app.driver.findElement(By.xpath("//span[@class='name'][text()='Catalog']")).click();
     app.driver.findElement(By.linkText("Add New Product")).click();
 

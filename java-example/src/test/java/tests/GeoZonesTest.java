@@ -15,7 +15,7 @@ public class GeoZonesTest extends TestBase{
   @Test
   public void geoZonesTest() {
 
-    app.login();
+    app.mainPage().login();
     app.driver.navigate().to("http://localhost/litecart/admin/?app=geo_zones&doc=geo_zones");//открыть  админку на странице GeoZones
 
     WebElement table = app.driver.findElement(By.className("dataTable"));//получить таблицу со страними

@@ -9,7 +9,7 @@ public class Registration extends TestBase {
   @Before
   public void ensurePreconditions() {
     /**отключить капча в админке**/
-    app.login();
+    app.mainPage().login();
     app.driver.findElement(By.xpath("//span[@class='name'][text()='Settings']")).click();
     app.driver.findElement(By.xpath("//span[@class='name'][text()='Security']")).click();
     WebElement captcha = app.driver.findElement(By.xpath("//tr[@class='row'][.//td[text()='CAPTCHA']]"));

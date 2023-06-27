@@ -14,7 +14,7 @@ public class CountriesTest extends TestBase {
   @Test
   public void countriesTest() {
 
-    app.login();
+    app.mainPage().login();
     app.driver.navigate().to("http://localhost/litecart/admin/?app=countries&doc=countries");//открыть  админку на странице Countries
 
     //а) проверить, что страны расположены в алфавитном порядке

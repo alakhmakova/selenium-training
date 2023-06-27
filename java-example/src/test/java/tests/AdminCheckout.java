@@ -12,7 +12,7 @@ public class AdminCheckout extends TestBase {
   @Test
   public void adminCheckoutTest() {
     //1) вход в панель администратора
-    app.login();
+    app.mainPage().login();
 
     //2) 2 цикла прокликивают последовательно все пункты меню слева, включая вложенные пункты
     List<WebElement> menuItems = app.driver.findElements(By.id("app-"));//получаю список пунктов меню

@@ -18,7 +18,7 @@ dependencies {
     implementation 'com.beust:jcommander:1.82'
     implementation 'com.google.code.gson:gson:2.10.1'
     implementation 'com.thoughtworks.xstream:xstream:1.4.20'
-    implementation ('net.lightbody.bmp:browsermob-core:2.1.5') {
+    implementation ('com.github.valfirst.browserup-proxy:browserup-proxy-core:2.2.10') {
         exclude module: 'selenium'
     }
 

@@ -1,7 +1,8 @@
 package tests;
 
 import appmanager.ApplicationManager;
-import net.lightbody.bmp.core.har.Har;
+import appmanager.MainPage;
+import com.browserup.harreader.model.Har;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -15,7 +16,7 @@ public class BrowserLogsTest extends TestBase{
   ApplicationManager app = new ApplicationManager();
   @Test
   public void browserLogsTest() {
-    app.login();
+    app.mainPage().login();
 
     app.proxy.newHar();
     app.driver.get("http://localhost/litecart/admin/?app=catalog&doc=catalog&category_id=1");
@@ -45,4 +46,5 @@ public class BrowserLogsTest extends TestBase{
       app.driver.findElement(By.linkText("Subcategory")).click();
     }
   }
+
 }

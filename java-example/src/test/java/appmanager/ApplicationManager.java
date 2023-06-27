@@ -1,12 +1,11 @@
 package appmanager;
 
-import net.lightbody.bmp.BrowserMobProxy;
-import net.lightbody.bmp.BrowserMobProxyServer;
-import net.lightbody.bmp.client.ClientUtil;
+import com.browserup.bup.BrowserUpProxy;
+import com.browserup.bup.BrowserUpProxyServer;
+import com.browserup.bup.client.ClientUtil;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import tests.TestBase;
@@ -21,7 +20,7 @@ public class ApplicationManager {
 
   public EventFiringWebDriver driver;
   public WebDriverWait wait;
-  public BrowserMobProxy proxy;
+  public BrowserUpProxy proxy;
   public static ThreadLocal<EventFiringWebDriver> tlDriver = new ThreadLocal<>();
 
 
@@ -39,11 +38,12 @@ public class ApplicationManager {
   // Установите URL-адрес удаленной машины, где запущен Selenium Server
   URL remoteUrl = new URL("http://localhost:4444/wd/hub");
 
-   proxy = new BrowserMobProxyServer();
+   proxy = new BrowserUpProxyServer();
    proxy.start(0);
-   Proxy seleniumProxy = ClientUtil.createSeleniumProxy(proxy);
+    Proxy seleniumProxy = ClientUtil.createSeleniumProxy(proxy);
    ChromeOptions options = new ChromeOptions();
-   options.setCapability(CapabilityType.PROXY, seleniumProxy);
+    options.setProxy(seleniumProxy);
+   //options.setCapability(CapabilityType.PROXY, seleniumProxy);
 
     driver = new EventFiringWebDriver(new ChromeDriver(options));
 
@@ -72,7 +72,7 @@ public class ApplicationManager {
             driver.quit();
             driver = null;
           }));
-  mainPage = new MainPage(driver);
+  mainPage = new MainPage(driver, proxy);
   productPage = new ProductPage(driver, wait);
   cartPage = new CartPage(driver, wait);
 }
@@ -89,12 +89,12 @@ public class ApplicationManager {
       return driver.findElements(locator).size() > 0;
     }
 
-  public void login () {
-      driver.get("http://localhost/litecart/admin/");
-      driver.findElement(By.name("username")).sendKeys("admin");
-      driver.findElement(By.name("password")).sendKeys("admin");
-      driver.findElement(By.name("login")).click();
-    }
+//  public void login () {
+//      driver.get("http://localhost/litecart/admin/");
+//      driver.findElement(By.name("username")).sendKeys("admin");
+//      driver.findElement(By.name("password")).sendKeys("admin");
+//      driver.findElement(By.name("login")).click();
+//    }
 
   public MainPage mainPage() {return mainPage;}
 
