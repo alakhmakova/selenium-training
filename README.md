@@ -12,7 +12,7 @@
 2. Preparing the infrastructure for Java
 3. Launching and stopping the browser
 4. Opening pages and waiting for page load
-5. Element locating on the page
+5. Element located on the page
 6. Actions: click and sendKeys
 7. Element properties: getText and getAttribute
 ### III Browser Launching
@@ -42,19 +42,19 @@
 5. Styles
 ### VI Element Actions
 #### 1. Simple
-● click
-● sendKeys
-● clear
-● submit
+- click
+- sendKeys
+- clear
+- submit
 #### 2. Complex
-● Mouse-hovering
-● Drag and drop
-● Right-click
-● Coordinate control
-● Modifiers (ctrl, shift)
+- Mouse-hovering
+- Drag and drop
+- Right-click
+- Coordinate control
+- Modifiers (ctrl, shift)
 ### VII Waits (WebDriverWait)
 1. Waiting for element visibility
-2. Waiting for element disappearance
+2. Waiting for the element to disappear
 3. Waiting for element properties
 4. Waiting for a specific number of elements
 5. Custom wait conditions
